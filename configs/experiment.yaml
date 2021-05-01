@@ -1,0 +1,21 @@
+general:
+  TTA: false
+  augmentations: true
+  category: super_category
+  experiment_id: 26-04-2021
+  n_folds: 5
+  seed: 42
+  tool: detectron2
+  fold: 0
+model:
+  base_lr: 0.0004
+  batchsize_per_image: 1024
+  epochs: 9
+  images_per_batch: 4
+  model_name: faster_rcnn_R_101_FPN_3x
+  num_classes: 29
+preprocess:
+  height: 1500
+  longest_max_size: 1500
+  smallest_max_size: 1000
+  width: 1500
