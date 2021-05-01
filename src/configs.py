@@ -67,6 +67,11 @@ def load_detectron_config(config , path = os.path.join(CONFIG_PATH , "detectron_
     cfg.DATASETS.TRAIN = (train_dataset_name,)
     cfg.DATASETS.TEST = (test_dataset_name,)
     cfg.OUTPUT_DIR_BEST = LOGS_PATH
+    cfg.DATALOADER.NUM_WORKERS = 1
+    cfg.SOLVER.IMS_PER_BATCH = config.model["images_per_batch"]
+    cfg.SOLVER.BASE_LR = config.model["base_lr"]  # pick a good LR
+    cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = config.model["batchsize_per_image"]   # faster, and good enough for this toy dataset (default: 512)
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = config.model["num_classes"]
     return cfg
 
 
