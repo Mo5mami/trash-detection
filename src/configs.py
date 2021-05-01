@@ -4,6 +4,7 @@ MODELS_PATH = "models"
 CONFIG_PATH = "configs"
 
 from detectron2.config import get_cfg
+from detectron2 import model_zoo
 
 from yacs.config import CfgNode as CN
 from functools import wraps
@@ -53,7 +54,8 @@ def load_detectron_config(config , path = os.path.join(CONFIG_PATH , "detectron_
     cfg = get_cfg()
     cfg.OUTPUT_DIR_BEST = LOGS_PATH
     cfg.merge_from_file(path)
-    cfg.MODEL.WEIGHTS = None
+    cfg.merge_from_file(model_zoo.get_config_file(f"COCO-Detection/{config.model['model_name']}.yaml"))
+    #cfg.MODEL.WEIGHTS = None
     fold = config.general["fold"]
     train_dataset_name=f"my_dataset_train_{fold}"
     test_dataset_name=f"my_dataset_test_{fold}"

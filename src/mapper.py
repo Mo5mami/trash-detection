@@ -1,8 +1,10 @@
 import detectron2
 from detectron2.data import transforms as T
 from detectron2.data import detection_utils as utils
+
 import torch
 
+import numpy as np
 import cv2
 import copy
 
@@ -42,15 +44,14 @@ class PersonalMapper (detectron2.data.DatasetMapper):
             obj["category_id"] for obj in dataset_dict.pop("annotations")
         ]
         
-        if albu_transformations is not None:
-            transform_list=get_transforms(self.is_train)
-            image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            transform_result=transform_list(image=image,bboxes=annos_bbox,category_id=annos_categroy_id)
-            image=cv2.cvtColor(transform_result["image"], cv2.COLOR_RGB2BGR)
-            annos=[annos[i] for i in range(len(transform_result["bboxes"]))]
-            for i in range(len(annos)):
-                annos[i]["bbox"]=list(transform_result["bboxes"][i])
-                annos[i]["category_id"]=transform_result["category_id"][i]
+        transform_list=get_transforms(self.is_train)
+        image=cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        transform_result=transform_list(image=image,bboxes=annos_bbox,category_id=annos_categroy_id)
+        image=cv2.cvtColor(transform_result["image"], cv2.COLOR_RGB2BGR)
+        annos=[annos[i] for i in range(len(transform_result["bboxes"]))]
+        for i in range(len(annos)):
+            annos[i]["bbox"]=list(transform_result["bboxes"][i])
+            annos[i]["category_id"]=transform_result["category_id"][i]
         
         dataset_dict["annotations"]=annos
         
