@@ -57,9 +57,9 @@ def load_detectron_config(config , path = os.path.join(CONFIG_PATH , "detectron_
     load detectron config (detectron_config.yaml) as a config node
     """
     cfg = get_cfg()
-    cfg.OUTPUT_DIR_BEST = LOGS_PATH
-    cfg.merge_from_file(path)
     cfg.merge_from_file(model_zoo.get_config_file(f"COCO-Detection/{config.model['model_name']}.yaml"))
+    cfg.OUTPUT_DIR_BEST = "fill"
+    cfg.merge_from_file(path)
     #cfg.MODEL.WEIGHTS = None
     fold = config.general["fold"]
     train_dataset_name=f"my_dataset_train_{fold}"
