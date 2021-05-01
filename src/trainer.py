@@ -50,7 +50,7 @@ class PersonalTrainer (detectron2.engine.defaults.DefaultTrainer):
     def build_evaluator(cls, cfg, dataset_name):
         return COCOEvaluator(dataset_name, ("bbox",), False, output_dir=None)
 
-
+ 
 @inject_config
 def train(config,annot_df , images_df , annot):
     """
