@@ -8,7 +8,7 @@ general:
   tool: detectron2
   fold: 0
 model:
-  base_lr: 0.0004
+  base_lr: 0.001
   batchsize_per_image: 1024
   epochs: 9
   images_per_batch: 4
