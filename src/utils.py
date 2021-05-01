@@ -38,8 +38,8 @@ def register_dataset(config , annot_df , images_df , annot):
     fold = config.general["fold"]
     train_dataset_name=f"my_dataset_train_{fold}"
     test_dataset_name=f"my_dataset_test_{fold}"
-    train_dataset_file=f"my_dataset_train_{fold}.json"
-    test_dataset_file=f"my_dataset_test_{fold}.json"
+    train_dataset_file=os.path.join(DATASET_PATH,f"my_dataset_train_{fold}.json")
+    test_dataset_file=os.path.join(DATASET_PATH,f"my_dataset_test_{fold}.json")
     
     train_annot_df=annot_df[annot_df["folds"]!=fold]
     test_annot_df=annot_df[annot_df["folds"]==fold]
