@@ -5,6 +5,34 @@ In this repo we are going to work on the [TACO dataset](http://tacodataset.org/)
 
 I used as a training framework [Detectron2](https://github.com/facebookresearch/detectron2)
 
+## Deployment
+You can find this model deployed in my personal website: [Personal Website](https://personalwebsitemo5.vercel.app/) with TorchServe [TSS](https://github.com/Mo5mami/TSS)
+
+If you face some **issues** with inference, The model server is hardware demanding and I can only work with free tier / limited student credits.
+
+
+## Training notebook:
+### Train pipeline 1 (best)
+- Training on 2 parts
+- Validation strategy : Stratfied group kfold
+- AP@50 : 27.257
+ 
+[Part 1](https://www.kaggle.com/mo5mami/trash-detection-project-with-taco-dataset)
+[Part 2](https://www.kaggle.com/mo5mami/trash-detection-project-with-taco-dataset-part-2)
+
+### Train pipeline 2
+- Training on 2 parts
+- Validation strategy : Group kfold
+- Heavy augs
+- AP@50 : 32.242
+- Notebook not so clean but decided to put it to show different pipelines
+- Although this pipeline score a lot, The other one seem to generalize better (Augs are more sensible)
+- Group kfold is under-representing smaller classes
+
+[Notebook](https://www.kaggle.com/mo5mami/trash-detection-project-with-heavier-augs)
+
+
+
 ## Our goals:
 - The yaml config files **experiment.yaml** and **detectron_config.yaml** will help configurate the whole project
 - **Train** an object detection model using TACO dataset
