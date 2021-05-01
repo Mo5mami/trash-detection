@@ -6,7 +6,10 @@ from .configs import inject_config
 from .utils import seed_all
 
 class RepeatedStratifiedGroupKFold():
-
+    """
+    Each set contains approximately the same percentage of samples of each target class as the complete set.
+    The same group is not represented in both testing and training sets.
+    """
     def __init__(self, n_splits=5, n_repeats=1, random_state=None):
         self.n_splits = n_splits
         self.n_repeats = n_repeats
@@ -65,6 +68,11 @@ class RepeatedStratifiedGroupKFold():
 
 @inject_config
 def kfold_split(config,df):
+    """
+    Stratified group kfold
+    target : category_id
+    groups : image_id
+    """
     seed_all()
     df["folds"]=-1
     kf = RepeatedStratifiedGroupKFold(n_splits=config.general["n_folds"], random_state=config.general["seed"])

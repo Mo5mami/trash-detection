@@ -15,7 +15,6 @@ def train_function():
     images_df=pd.DataFrame(annot["images"])
     annot_df , annot = choose_category(annot_df , annot)
     annot_df = kfold_split(annot_df)
-    #print(annot_df.head())
     train(annot_df , images_df , annot)
 
 
@@ -24,6 +23,3 @@ def train_function():
 if __name__ == "__main__":
     setup_logger()
     train_function()
-    #from src.configs import load_general_config , load_detectron_config
-    #cfg = load_detectron_config()
-    #print(cfg)

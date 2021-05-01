@@ -37,12 +37,10 @@ class PersonalTrainer (detectron2.engine.defaults.DefaultTrainer):
     @classmethod
     def build_train_loader(cls, cfg):
         
-        #return build_detection_train_loader(cfg,mapper=DatasetMapper(cfg,is_train=True,))
         return build_detection_train_loader(cfg,mapper=PersonalMapper(cfg,is_train=True,augmentations=[]))
     @classmethod
     def build_test_loader(cls, cfg, dataset_name):
         
-        #return build_detection_test_loader( cfg,dataset_name,mapper=DatasetMapper(cfg,is_train=False,))
         return build_detection_test_loader( cfg,dataset_name,mapper=PersonalMapper(cfg,is_train=False,augmentations=[]))
 
     

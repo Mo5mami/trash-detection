@@ -17,7 +17,6 @@ def eval_function(path):
     images_df=pd.DataFrame(annot["images"])
     annot_df , annot = choose_category(annot_df , annot)
     annot_df = kfold_split(annot_df)
-    #print(annot_df.head())
     evaluate(annot_df , images_df , annot , path)
 
 
@@ -29,6 +28,3 @@ if __name__ == "__main__":
     parser.add_argument('--model_path', required=False, default="models/best_model.pth", help="Path to the weights")
     args = parser.parse_args()
     eval_function(args.model_path)
-    #from src.configs import load_general_config , load_detectron_config
-    #cfg = load_detectron_config()
-    #print(cfg)

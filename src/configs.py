@@ -12,6 +12,9 @@ import os
 import yaml
 
 def load_general_config(path = os.path.join(CONFIG_PATH , "experiment.yaml") ):
+    """
+    load general config (experiment.yaml) as a config node
+    """
     _C = CN()
     _C.general=CN()
     _C.general.seed = 42
@@ -34,7 +37,6 @@ def load_general_config(path = os.path.join(CONFIG_PATH , "experiment.yaml") ):
     _C.model.num_classes = 29 #29 if super category 60 if normal category 
     _C.model.model_name = "faster_rcnn_R_101_FPN_3x"
     _C.model.batchsize_per_image = 1024
-    #_C.model.images_per_batch = 4
     _C.model.images_per_batch = 4
     _C.model.epochs = 9
     cfg = _C
@@ -42,7 +44,7 @@ def load_general_config(path = os.path.join(CONFIG_PATH , "experiment.yaml") ):
     return cfg
 
 def inject_config(funct):
-    """Inject a yacs CfgNode object in a function as first arg."""
+    """Inject general config in a function as first arg."""
     @wraps(funct)
     def function_wrapper(*args,**kwargs):
         return funct(load_general_config(),*args,**kwargs)  
@@ -51,6 +53,9 @@ def inject_config(funct):
 
 @inject_config
 def load_detectron_config(config , path = os.path.join(CONFIG_PATH , "detectron_config.yaml") ):
+    """
+    load detectron config (detectron_config.yaml) as a config node
+    """
     cfg = get_cfg()
     cfg.OUTPUT_DIR_BEST = LOGS_PATH
     cfg.merge_from_file(path)
@@ -74,6 +79,9 @@ def dump_cfg(config , path = "experiment.yaml"):
 
 
 def dump_dict(config,path="config.yaml"):
-        stream = open(path, 'w')
-        yaml.dump(config,stream)
-        stream.close()
+    """
+    Dump python dictionary to a yaml file
+    """
+    stream = open(path, 'w')
+    yaml.dump(config,stream)
+    stream.close()

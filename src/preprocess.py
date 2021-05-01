@@ -7,6 +7,7 @@ from .utils import get_normal_categories,get_super_categories
 def fix_annotations(path = os.path.join(DATASET_PATH,"data/annotations.json" ) ,
 result_path = os.path.join(DATASET_PATH,"data/new_annotations.json" )):
     """
+        Fix annotation problems in the dataset
         repeated annotations idx 
         308 => 0
         4039  =>2197
@@ -29,7 +30,9 @@ result_path = os.path.join(DATASET_PATH,"data/new_annotations.json" )):
 
 @inject_config
 def choose_category(config , annot_df , annot):
-
+    """
+    Function to help set the default category to normal category or super category
+    """
     categories = get_normal_categories()
     super_categories = get_super_categories()
     annot_df["category"]=annot_df["category_id"].apply(lambda value : categories[value])

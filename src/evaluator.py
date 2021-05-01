@@ -13,7 +13,8 @@ from .utils import register_dataset , seed_all
 @inject_config
 def evaluate(config,annot_df , images_df , annot , path):
     """
-    train function that help train on the dataset and validate on a certain fold
+    evaluation function that help test a chosen model on the train and validation dataset
+    path : model path
     """
     seed_all()
     fold = config.general["fold"]
@@ -25,13 +26,11 @@ def evaluate(config,annot_df , images_df , annot , path):
     m=DetectionCheckpointer(model).load(cfg.MODEL.WEIGHTS)
 
     evaluator = COCOEvaluator(f"my_dataset_test_{fold}", ("bbox",), False, output_dir=LOGS_PATH)
-    #val_loader = build_detection_test_loader(cfg, f"my_dataset_test_{fold}")
     loader = build_detection_test_loader( cfg,f"my_dataset_test_{fold}",mapper=PersonalMapper(cfg,is_train=False,augmentations=[]))
     val_metric=inference_on_dataset(model, loader, evaluator)
     metrics["validation_metric"]=val_metric
 
     evaluator = COCOEvaluator(f"my_dataset_train_{fold}", ("bbox",), False, output_dir=LOGS_PATH)
-    #val_loader = build_detection_test_loader(cfg, f"my_dataset_train_{fold}")
     loader = build_detection_test_loader( cfg,f"my_dataset_train_{fold}",mapper=PersonalMapper(cfg,is_train=False,augmentations=[]))
     train_metric=inference_on_dataset(model, loader, evaluator)
     metrics["train_metric"]=train_metric
