@@ -12,7 +12,7 @@ If you face some **issues** with inference, The model server is hardware demandi
 
 
 ## Training notebook:
-### Train pipeline 1 (best)
+### Train pipeline 1
 - Training on 2 parts
 - Validation strategy : Stratfied group kfold
 - AP@50 : 27.257
