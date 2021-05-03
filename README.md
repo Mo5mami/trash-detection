@@ -25,7 +25,6 @@ If you face some **issues** with inference, The model server is hardware demandi
 - Validation strategy : Group kfold
 - Heavy augs
 - AP@50 : 32.242
-- Notebook not so clean but decided to put it to show different pipelines
 - Although this pipeline score a lot, The other one seem to generalize better (Augs are more sensible)
 - Group kfold is under-representing smaller classes
 
